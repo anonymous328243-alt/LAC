@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LAC: Light Actor, Deep Critic for Offline RL</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Georgia, serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #2b2b2b;
+        }
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #c0392b;
+            border-bottom: 2px solid #c0392b;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .authors {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+        .venue {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        .links {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .links a {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #c0392b;
+            color: white;
+            text-decoration: none;
+            margin: 0 8px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .links a:hover { background: #7b1f12; }
+        .abstract {
+            background: #f8f8f8;
+            padding: 20px;
+            border-left: 4px solid #c0392b;
+            text-align: justify;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        figure {
+            text-align: center;
+            margin: 20px 0;
+        }
+        figure img { max-width: 100%; }
+        figcaption { color: #666; font-size: 0.9em; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>LAC: Light Actor, Deep Critic<br>for Offline Reinforcement Learning</h1>
+    
+    <p class="authors">Anonymous Authors</p>
+    <p class="venue">Submitted to CIKM 2026</p>
+    
+    <div class="links">
+        <a href="#">📄 Paper (coming soon)</a>
+        <a href="https://github.com/anonymous42323/LAC">💻 Code</a>
+    </div>
+    
+    <h2>Abstract</h2>
+    <div class="abstract">
+        Recent progress in offline reinforcement learning has been driven by 
+        expressive generative actors such as diffusion and flow-matching policies, 
+        which capture multi-modal behavior in offline datasets. However, these 
+        actors require multiple denoising or integration steps per action and thus 
+        incur substantial overhead at every decision in deployment. In this work, 
+        we revisit where capacity should be invested in an offline actor–critic 
+        method. Since the critic is discarded at deployment while the actor runs 
+        at every decision step, allocating capacity to the critic is more favorable 
+        for inference-time efficiency. We identify three failure modes that arise 
+        when critics are deepened—optimization, bootstrap-noise amplification, and 
+        value-range drift—and address each with a corresponding ingredient: a 
+        residual MLP backbone, n-step bootstrap targets, and a categorical 
+        cross-entropy loss. Combining these ingredients with a lightweight 
+        deterministic actor, we propose <b>LAC</b> (<b>L</b>ight <b>A</b>ctor, 
+        deep <b>C</b>ritic). On OGBench, LAC matches the strongest diffusion- and 
+        flow-matching baselines while reducing per-action inference latency by 
+        up to 4×.
+    </div>
+    
+    <h2>Key Idea</h2>
+    <div class="highlight">
+        <b>Asymmetric capacity allocation:</b> The critic shapes the actor during 
+        training but is discarded at deployment, while only the actor runs at 
+        every decision step. Investing capacity in the critic pays a one-time 
+        training cost, whereas investing capacity in the actor pays a recurring 
+        inference cost.
+    </div>
+    
+    <h2>Three Failure Modes of Deep Critics</h2>
+    <ul>
+        <li><b>F1. Optimization failure</b> — addressed by a residual MLP backbone.</li>
+        <li><b>F2. Bootstrap-noise amplification</b> — addressed by n-step bootstrap targets.</li>
+        <li><b>F3. Value-range drift</b> — addressed by a categorical cross-entropy loss.</li>
+    </ul>
+    
+    <h2>Key Results</h2>
+    <ul>
+        <li>LAC achieves the highest average score on the OGBench benchmark suite.</li>
+        <li>LAC-S exceeds all generative-actor baselines using an actor ~1/10 the size.</li>
+        <li>Up to 4× faster per-action inference compared to iterative generative actors.</li>
+        <li>The LAC critic acts as a drop-in improvement for other actor parametrizations.</li>
+    </ul>
+    
+    <h2>Code</h2>
+    <p>
+        Full implementation available at 
+        <a href="https://github.com/anonymous42323/LAC">github.com/anonymous42323/LAC</a>.
+    </p>
+    
+</body>
+</html>
